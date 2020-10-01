@@ -8,8 +8,4 @@ class MsgraphCli < Formula
   def install
     bin.install "graph"
   end
-
-  test do
-    system "false"
-  end
 end
