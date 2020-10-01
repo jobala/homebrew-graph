@@ -227,11 +227,45 @@ class MsgraphCli < Formula
   end
 
   def install
-        # Work around Xcode 11 clang bug
+    # Work around Xcode 11 clang bug
     # https://code.videolan.org/videolan/libbluray/issues/20
     ENV.append_to_cflags "-fno-stack-check" if DevelopmentTools.clang_build_version >= 1010
-    virtualenv_install_with_resources
 
+    venv = virtualenv_create(libexec, "python3")
+    venv.pip_install resources
+    
+    extensions = [
+      buildpath/'msgraph-cli-extensions/src/analytics',
+      buildpath/'msgraph-cli-extensions/src/bookings',
+      buildpath/'msgraph-cli-extensions/src/education',
+      buildpath/'msgraph-cli-extensions/src/filesshares',
+      buildpath/'msgraph-cli-extensions/src/groupsendpoint',
+      buildpath/'msgraph-cli-extensions/src/groupsonenote',
+      buildpath/'msgraph-cli-extensions/src/groupsplanner',
+      buildpath/'msgraph-cli-extensions/src/notification',
+      buildpath/'msgraph-cli-extensions/src/onlinemeetings',
+      buildpath/'msgraph-cli-extensions/src/places',
+      buildpath/'msgraph-cli-extensions/src/reports',
+      buildpath/'msgraph-cli-extensions/src/sitesonenote',
+      buildpath/'msgraph-cli-extensions/src/subscriptions',
+      buildpath/'msgraph-cli-extensions/src/teamschats',
+      buildpath/'msgraph-cli-extensions/src/teamsteamwork',
+      buildpath/'msgraph-cli-extensions/src/userscontacts',
+      buildpath/'msgraph-cli-extensions/src/usersdevices',
+      buildpath/'msgraph-cli-extensions/src/usersmail',
+      buildpath/'msgraph-cli-extensions/src/usersonenote',
+      buildpath/'msgraph-cli-extensions/src/userspeople',
+      buildpath/'msgraph-cli-extensions/src/usersplanner',
+      buildpath/'msgraph-cli-extensions/src/usersuser',
+      buildpath,
+    ]
+
+    # Install extensions
+    extensions.each do |extension|
+      cd extension do
+        venv.pip_install extension
+      end
+    end
 
     (bin/"graph").write <<~EOS
       #!/usr/bin/env bash
