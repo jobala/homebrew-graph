@@ -693,21 +693,8 @@ class MsgraphCli < Formula
         # Work around Xcode 11 clang bug
     # https://code.videolan.org/videolan/libbluray/issues/20
     ENV.append_to_cflags "-fno-stack-check" if DevelopmentTools.clang_build_version >= 1010
+    virtualenv_install_with_resources
 
-    venv = virtualenv_create(libexec, "python3")
-    venv.pip_install resources
-
-    # Get the CLI components we'll install
-    components = [
-      buildpath/".",
-    ]
-
-    # Install CLI
-    components.each do |item|
-      cd item do
-        venv.pip_install item
-      end
-    end
 
     (bin/"graph").write <<~EOS
       #!/usr/bin/env bash
