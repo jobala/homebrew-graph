@@ -6,7 +6,7 @@ class MsgraphCli < Formula
   license "NOASSERTION"
 
   def install
-    bin.install "mg"
+    bin.install "graph"
   end
 
   test do
