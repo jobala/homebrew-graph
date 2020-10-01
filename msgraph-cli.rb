@@ -1,4 +1,6 @@
 class MsgraphCli < Formula
+  include Language::Python::Virtualenv
+  
   desc "Python based command line tools for interacting with Microsoft Graph"
   homepage ""
   url "https://github.com/microsoftgraph/msgraph-cli/archive/0.0.2.tar.gz"
