@@ -2,10 +2,11 @@ class MsgraphCli < Formula
   include Language::Python::Virtualenv
   
   desc "Python based command line tools for interacting with Microsoft Graph"
-  homepage ""
+  homepage "https://developer.microsoft.com/en-us/graph"
+  version "0.0.3"
   url "https://github.com/microsoftgraph/msgraph-cli/archive/0.0.2.tar.gz"
   sha256 "93b08b1462b8e5f9331620cb6537f0bbf39f6a477734d9cd464b02667713142d"
-  license "NOASSERTION"
+  license "MIT"
 
   depends_on "openssl@1.1"
   depends_on "python@3.8"
@@ -227,11 +228,11 @@ class MsgraphCli < Formula
   end
 
   def install
-    # Work around Xcode 11 clang bug
+        # Work around Xcode 11 clang bug
     # https://code.videolan.org/videolan/libbluray/issues/20
     ENV.append_to_cflags "-fno-stack-check" if DevelopmentTools.clang_build_version >= 1010
-
     venv = virtualenv_create(libexec, "python3")
+
     venv.pip_install resources
 
     extensions = Dir.glob('msgraph-cli-extensions/src/*')
@@ -245,7 +246,6 @@ class MsgraphCli < Formula
         venv.pip_install extension
       end
     end
-
 
 
     (bin/"graph").write <<~EOS
