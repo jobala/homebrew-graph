@@ -3,9 +3,9 @@ class MsgraphCli < Formula
   
   desc "Python based command line tools for interacting with Microsoft Graph"
   homepage "https://developer.microsoft.com/en-us/graph"
-  version "0.0.3"
-  url "https://github.com/microsoftgraph/msgraph-cli/archive/0.0.2.tar.gz"
-  sha256 "93b08b1462b8e5f9331620cb6537f0bbf39f6a477734d9cd464b02667713142d"
+  version "1.0.2"
+  url "https://github.com/microsoftgraph/msgraph-cli/archive/msgraph_cli_28698.tar.gz"
+  sha256 "ee867443b5dc2d4dc83853c9ad449499ee08ae0ac50eb861a929633bee079d83"
   license "MIT"
 
   depends_on "openssl@1.1"
@@ -43,8 +43,8 @@ class MsgraphCli < Formula
   end
 
   resource "azure-core" do
-    url "https://files.pythonhosted.org/packages/60/5a/a672c0620ca308a0d7957bafe7bb7cdee2c74ea87d11d98c72cc9453dbf3/azure-core-1.8.1.zip"
-    sha256 "7efbeac3a6dfb634cb5323bc04e18ab609aeab6b03610808091aa0517373d626"
+    url "https://files.pythonhosted.org/packages/02/dd/fc1cb9bd88196d674d7c9b5f87fb12a669b5f61700d8990cbf5994b0e879/azure-core-1.8.2.zip"
+    sha256 "621b53271f7988b766f8a7d7f7a2c44241e3d2c1d8db13e68089d6da6241748e"
   end
 
   resource "azure-identity" do
@@ -228,7 +228,7 @@ class MsgraphCli < Formula
   end
 
   def install
-        # Work around Xcode 11 clang bug
+    # Work around Xcode 11 clang bug
     # https://code.videolan.org/videolan/libbluray/issues/20
     ENV.append_to_cflags "-fno-stack-check" if DevelopmentTools.clang_build_version >= 1010
     venv = virtualenv_create(libexec, "python3")
