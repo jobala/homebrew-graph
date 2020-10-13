@@ -248,7 +248,7 @@ class MsgraphCli < Formula
     end
 
 
-    (bin/"graph").write <<~EOS
+    (bin/"gr").write <<~EOS
       #!/usr/bin/env bash
       MG_INSTALLER=HOMEBREW #{libexec}/bin/python -m msgraph.cli \"$@\"
     EOS
