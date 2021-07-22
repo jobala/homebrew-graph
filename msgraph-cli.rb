@@ -3,9 +3,9 @@ class MsgraphCli < Formula
 
   desc "Python based command line tools for interacting with Microsoft Graph"
   homepage "https://developer.microsoft.com/en-us/graph"
-  version "0.1.4"
-  url "https://codeload.github.com/microsoftgraph/msgraph-cli/tar.gz/refs/tags/beta"
-  sha256 "045fa59b9b2ce399f7ff1da7e069b3d1f93a6553c7e9e71da0e94dbbee33ed0b"
+  version "0.1.5.1"
+  url "https://codeload.github.com/microsoftgraph/msgraph-cli/tar.gz/refs/tags/0.1.5.1"
+  sha256 "9875f0f729bde45290f941cc9e3e80be8eb8a48ce51eb745465c86e4161c9e7d"
   license "MIT"
 
   depends_on "openssl@1.1"
@@ -48,13 +48,6 @@ class MsgraphCli < Formula
         end
       end
     end
-
-
-    cd buildpath do
-        venv.instance_variable_get(:@formula).system venv.instance_variable_get(:@venv_root)/"bin/pip", "download" , "-i", "https://test.pypi.org/simple/", "msgraph-cli-core==2.25.0.3", "--no-deps"
-        venv.instance_variable_get(:@formula).system venv.instance_variable_get(:@venv_root)/"bin/pip", "install" , "./msgraph-cli-core-2.25.0.3.tar.gz"
-    end
-
 
     (bin/"graph").write <<~EOS
       #!/usr/bin/env bash
